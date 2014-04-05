@@ -1,17 +1,20 @@
 package com.srirang.mobilevocab;
 
 import android.content.Context;
-import android.widget.ImageView;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.srirang.screens.Screen;
+import com.srirang.screens.BaseScreen;
 import com.srirang.screens.ScreenManager;
+import com.srirang.screens.SplashScreen;
 
 public class Application {
 
 	public Context context;
 	
-	public Screen screen;
+	public BaseScreen screen;
 	public ScreenManager screenManager;
 	public AppAssetManager assetManager;
 	
@@ -24,34 +27,56 @@ public class Application {
 	}
 	
 	public void setupApplication(){
-		screenManager = ScreenManager.getInstance(context);
+		screenManager = ScreenManager.getInstance(this);
 		assetManager = AppAssetManager.getInstance(context);
-		/*
+		
+		screen = new SplashScreen(this, "SplashScreen");
+		mainRelativeLayout.addView(screen);
+		
+		/*Properties pro = assetManager.getCSV("properties.csv");
+		String line = pro.toString();
+		
+		RelativeLayout rl = new RelativeLayout(context);
+		
 		TextView tv = new TextView(context);
-		LayoutParams params = new LayoutParams(200, 40);
+		LayoutParams params = new LayoutParams(320, 400);
 		tv.setLayoutParams(params);
 		//tv.setPadding(100, 50, 0, 0);
-		tv.setText("Hi Srirang");
+		tv.setText(line);
 		
-		mainRelativeLayout.addView(tv); */
+		rl.addView(tv);
 		
-		ImageView iv = assetManager.getImage("splash-screen.png");
+		mainRelativeLayout.addView(rl); */
 		
-		mainRelativeLayout.addView(iv); 
+		/*ImageView iv = assetManager.getImage("splash-screen.png");
+		
+		mainRelativeLayout.addView(iv); */
+		
+		
 	}
 	
 	
-	public void changeScreen(Screen nextScreen){
+	public void changeScreen(BaseScreen nextScreen){
 	
-		screen.hide();
+		mainRelativeLayout.removeView(screen);
 		screen = nextScreen;
-		screen.load();
-		screen.show();
+		mainRelativeLayout.addView(screen);
 		screenManager.changeScreen(screen);
 	}
 	
 	public void lastScreen(){
 		changeScreen(screenManager.getPreviousScreen());
+	}
+	
+	public void setFont(TextView tv, String font){
+		if(font.equals("none")) return;
+		String[] fontEntities = font.split(":");
+		tv.setTypeface(assetManager.getTypeFace());
+		tv.setTextSize(Float.parseFloat(fontEntities[0]));
+		tv.setTextColor(Color.parseColor(fontEntities[1]));
+		if(fontEntities[2].equalsIgnoreCase("c")){
+			tv.setGravity(Gravity.CENTER);
+		}
 	}
 	
 }

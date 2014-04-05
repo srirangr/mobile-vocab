@@ -1,39 +1,42 @@
 package com.srirang.screens;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 import android.content.Context;
 
+import com.srirang.mobilevocab.Application;
+
 public class ScreenManager {
 	
 	public static ScreenManager instance = null;
+	public Application app;
 	
-	private final Stack<Screen> screenStack;
+	private final Stack<BaseScreen> screenStack;
 	
-	private ScreenManager(Context context) {
-		screenStack = new Stack<Screen>();
+	private ScreenManager(Application app) {
+		this.app = app;
+		screenStack = new Stack<BaseScreen>();
 	}
 	
-	public static ScreenManager getInstance(Context context){
+	public static ScreenManager getInstance(Application app){
 		if(instance == null){
-			instance = new ScreenManager(context);
+			instance = new ScreenManager(app);
 		}
 		return instance;
 	}
 	
-	public void changeScreen(Screen screen){
+	public void changeScreen(BaseScreen screen){
 		screenStack.push(screen);
 	}
 	
-	public Screen getTopScreen(){
+	public BaseScreen getTopScreen(){
 		if(screenStack != null){
 			return screenStack.peek();
 		}
 		return null;
 	}
 	
-	public Screen getPreviousScreen(){
+	public BaseScreen getPreviousScreen(){
 		if(screenStack != null){
 			screenStack.pop();
 		}
