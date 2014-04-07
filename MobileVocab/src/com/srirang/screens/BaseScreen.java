@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.srirang.mobilevocab.Application;
 
-public class BaseScreen extends RelativeLayout{
+public abstract class BaseScreen extends RelativeLayout{
 
 	public Application app;
 	public final String name;
@@ -25,10 +25,12 @@ public class BaseScreen extends RelativeLayout{
 		this.app = app;
 		this.name = name;
 		
-		readFromConfig(name+".csv");
+		readFromConfig("configs/"+name+".csv");
 		addViews();
 	}
 
+	public abstract void init();
+	
 	//For game loop. Now needed as of now
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -76,10 +78,6 @@ public class BaseScreen extends RelativeLayout{
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		
-	}
-	
-	public void init(){
 		
 	}
 	

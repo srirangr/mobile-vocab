@@ -27,4 +27,20 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    @Override
+    public void onBackPressed() {
+    	if(app.isPreviousScreen())
+    		finish();
+    	else {
+    		app.goToPreviousScreen();
+    	}
+    }
+    
+    /*@Override
+    protected void onDestroy() {
+    	app.clear();
+    	app = null;
+    	super.onDestroy();
+    }
+    */
 }

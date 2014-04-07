@@ -87,6 +87,6 @@ public class AppAssetManager {
 	}
 	
 	public Typeface getTypeFace(){
-		return Typeface.createFromAsset(assetManager, "futurr.ttf");
+		return Typeface.createFromAsset(assetManager, "fonts/futurr.ttf");
 	}
 }

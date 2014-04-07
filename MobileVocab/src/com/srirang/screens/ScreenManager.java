@@ -26,21 +26,23 @@ public class ScreenManager {
 	}
 	
 	public void changeScreen(BaseScreen screen){
+		System.out.println(screen.name + "added");
 		screenStack.push(screen);
 	}
 	
 	public BaseScreen getTopScreen(){
-		if(screenStack != null){
+		if(!screenStack.isEmpty()){
 			return screenStack.peek();
 		}
 		return null;
 	}
 	
-	public BaseScreen getPreviousScreen(){
-		if(screenStack != null){
-			screenStack.pop();
+	public boolean popCurrentScreen(){
+		if(!screenStack.isEmpty()){
+			BaseScreen screen = screenStack.pop();
+			System.out.println(screen.name + "removed");
 		}
-		return getTopScreen();
+		return screenStack.isEmpty();
 	}
 
 }

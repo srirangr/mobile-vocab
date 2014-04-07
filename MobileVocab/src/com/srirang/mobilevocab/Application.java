@@ -31,41 +31,30 @@ public class Application {
 		assetManager = AppAssetManager.getInstance(context);
 		
 		screen = new SplashScreen(this, "SplashScreen");
+		screen.init();
+		//screenManager.changeScreen(screen);
 		mainRelativeLayout.addView(screen);
-		
-		/*Properties pro = assetManager.getCSV("properties.csv");
-		String line = pro.toString();
-		
-		RelativeLayout rl = new RelativeLayout(context);
-		
-		TextView tv = new TextView(context);
-		LayoutParams params = new LayoutParams(320, 400);
-		tv.setLayoutParams(params);
-		//tv.setPadding(100, 50, 0, 0);
-		tv.setText(line);
-		
-		rl.addView(tv);
-		
-		mainRelativeLayout.addView(rl); */
-		
-		/*ImageView iv = assetManager.getImage("splash-screen.png");
-		
-		mainRelativeLayout.addView(iv); */
-		
-		
 	}
 	
 	
 	public void changeScreen(BaseScreen nextScreen){
 	
+		if(nextScreen == null) return;
+		
 		mainRelativeLayout.removeView(screen);
 		screen = nextScreen;
+		screen.init();
 		mainRelativeLayout.addView(screen);
 		screenManager.changeScreen(screen);
 	}
 	
-	public void lastScreen(){
-		changeScreen(screenManager.getPreviousScreen());
+	public boolean isPreviousScreen(){
+		boolean previousScreenAvailable = screenManager.popCurrentScreen();	
+		return previousScreenAvailable;
+	}
+	
+	public void goToPreviousScreen(){
+		changeScreen(screenManager.getTopScreen());
 	}
 	
 	public void setFont(TextView tv, String font){
@@ -77,6 +66,10 @@ public class Application {
 		if(fontEntities[2].equalsIgnoreCase("c")){
 			tv.setGravity(Gravity.CENTER);
 		}
+	}
+	
+	public void clear(){
+		screenManager = null;
 	}
 	
 }
