@@ -1,3 +1,15 @@
 viewType,x,y,width,height,asset,text,font,clickable
 //ImageView,0,0,480,800,splash-screen.png,none,none,exit
-TextView,0,0,800,480,none,Instructions: This is a very easy game to play. Try it,32:#B22222:c,none
+//TextView,0,0,800,480,none,FUTURR - Srirang Ranjalkar,18:#50504E:FUTURR:l,none
+//TextView,0,100,800,480,none,ARAPEY - Srirang Ranjalkar,18:#50504E:ARAPEY:l,none
+//TextView,0,150,800,480,none,BUDA - Srirang Ranjalkar,18:#50504E:BUDA:l,none
+//TextView,0,200,800,480,none,DELLA_RESPIRA - Srirang Ranjalkar,18:#50504E:DELLA_RESPIRA:l,none
+//TextView,0,250,800,480,none,GILDA_DISPLAY - Srirang Ranjalkar,18:#50504E:GILDA_DISPLAY:l,none
+//TextView,0,300,800,480,none,POIRET_ONE - Srirang Ranjalkar,18:#50504E:POIRET_ONE:l,none
+//TextView,0,350,800,480,none,TIENNE - Srirang Ranjalkar,18:#50504E:TIENNE:l,none
+//TextView,0,400,800,480,none,SURFACE - Srirang Ranjalkar,18:#50504E:SURFACE:l,none
+//TextView,0,500,800,480,none,BERTOLT_BRECHT - Srirang Ranjalkar,18:#50504E:BERTOLT_BRECHT:l,none
+//
+ImageView,180,35,110,120,profile.png,none,none,none
+TextView,0,100,480,200,none,Srirang Ranjalkar,24:#50504E:ALIKE:c,none
+TextView,40,210,400,100,none,text,18:#8EBD49:ARAPEY_ITALIC:c,text1

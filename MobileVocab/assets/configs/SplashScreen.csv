@@ -1,3 +1,3 @@
 viewType,x,y,width,height,asset,text,font,clickable
 //ImageView,0,0,480,800,splash-screen.png,none,none,exit
-TextView,0,0,800,480,none,Vocab Zombie,72:#B22222:c,none
+TextView,0,0,800,480,none,Portfolio,64:#8EBD49:FUTURR:c,none

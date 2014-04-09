@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
@@ -18,6 +19,8 @@ public abstract class BaseScreen extends RelativeLayout{
 	public Application app;
 	public final String name;
 	
+	protected Properties properties = new Properties();
+	
 	List<ScreenEntity> entityList = new ArrayList<ScreenEntity>();
 	
 	public BaseScreen(Application app, String name){
@@ -26,6 +29,7 @@ public abstract class BaseScreen extends RelativeLayout{
 		this.name = name;
 		
 		readFromConfig("configs/"+name+".csv");
+		init();
 		addViews();
 	}
 
@@ -83,7 +87,7 @@ public abstract class BaseScreen extends RelativeLayout{
 	
 	public void addViews(){
 		for(ScreenEntity entity : entityList) {
-			addView(entity.makeView(app));
+			addView(entity.makeView(app, properties));
 		}
 	}
 

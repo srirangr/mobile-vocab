@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.srirang.mobilevocab.EnumConfig.FontType;
 import com.srirang.screens.BaseScreen;
 import com.srirang.screens.ScreenManager;
 import com.srirang.screens.SplashScreen;
@@ -23,6 +24,7 @@ public class Application {
 	public Application(Context context, RelativeLayout layout) {
 		this.context = context;
 		mainRelativeLayout = layout;
+		mainRelativeLayout.setBackgroundColor(Color.parseColor("#FCFAFD"));
 		setupApplication();
 	}
 	
@@ -60,11 +62,14 @@ public class Application {
 	public void setFont(TextView tv, String font){
 		if(font.equals("none")) return;
 		String[] fontEntities = font.split(":");
-		tv.setTypeface(assetManager.getTypeFace());
+		tv.setTypeface(assetManager.getTypeFace(FontType.valueOf(fontEntities[2])));
 		tv.setTextSize(Float.parseFloat(fontEntities[0]));
 		tv.setTextColor(Color.parseColor(fontEntities[1]));
-		if(fontEntities[2].equalsIgnoreCase("c")){
-			tv.setGravity(Gravity.CENTER);
+		if(fontEntities.length == 4){
+			if(fontEntities[3].equalsIgnoreCase("c"))
+				tv.setGravity(Gravity.CENTER);
+			else if(fontEntities[3].equalsIgnoreCase("l"))
+				tv.setGravity(Gravity.LEFT);
 		}
 	}
 	

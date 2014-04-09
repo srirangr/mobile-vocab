@@ -19,7 +19,7 @@ public class SplashScreen extends BaseScreen {
 			public void run() {
 				app.changeScreen(new GameScreen(app,"GameScreen"));
 			}
-		}, 1500);
+		}, 500);
 	}
 
 }

@@ -10,7 +10,7 @@ public class GameScreen extends BaseScreen{
 
 	@Override
 	public void init() {
-		
+		properties.put("text1", "\"Building world class mobile apps\"");
 	}
 
 }
