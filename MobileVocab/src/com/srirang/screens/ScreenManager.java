@@ -2,25 +2,19 @@ package com.srirang.screens;
 
 import java.util.Stack;
 
-import android.content.Context;
-
-import com.srirang.mobilevocab.Application;
-
 public class ScreenManager {
 	
 	public static ScreenManager instance = null;
-	public Application app;
 	
 	private final Stack<BaseScreen> screenStack;
 	
-	private ScreenManager(Application app) {
-		this.app = app;
+	private ScreenManager() {
 		screenStack = new Stack<BaseScreen>();
 	}
 	
-	public static ScreenManager getInstance(Application app){
+	public static ScreenManager getInstance(){
 		if(instance == null){
-			instance = new ScreenManager(app);
+			instance = new ScreenManager();
 		}
 		return instance;
 	}

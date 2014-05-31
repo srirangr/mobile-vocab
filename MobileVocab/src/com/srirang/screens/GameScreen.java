@@ -10,7 +10,8 @@ public class GameScreen extends BaseScreen{
 
 	@Override
 	public void init() {
-		app.getWordList();
+		
+//		app.getWordList();
 	}
 
 }

@@ -27,21 +27,21 @@ public class AppAssetManager {
 	private final AssetManager assetManager;
 	public static AppAssetManager instance = null;
 	
-	public Context context;
-	private AppAssetManager(Context context){
-		this.context = context;
-		assetManager = context.getAssets(); 
+	public Typeface typeface = null;
+	
+	private AppAssetManager(AssetManager assetManager){
+		this.assetManager = assetManager; 
 	}
 	
-	public static AppAssetManager getInstance(Context context){
+	public static AppAssetManager getInstance(AssetManager assetManager){
 		if(instance == null){
-			instance = new AppAssetManager(context);
+			instance = new AppAssetManager(assetManager);
 		}
 		return instance;
 	}
 	
 	
-	public ImageView getImage(String name){
+	public ImageView getImage(Context context, String name){
 		try {
 			InputStream is = assetManager.open(name);
 			Bitmap bmp = BitmapFactory.decodeStream(is);
@@ -96,7 +96,11 @@ public class AppAssetManager {
 	}
 	
 	public Typeface getTypeFace(){
-		return Typeface.createFromAsset(assetManager, "fonts/futurr.ttf");
+		if(typeface == null)
+		{		
+			typeface =  Typeface.createFromAsset(assetManager, "fonts/futurr.ttf");
+		}
+		return typeface;
 	}
 	
 	public List<WordListItem> getWordList(){

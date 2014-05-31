@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,9 +29,13 @@ public abstract class Application extends Activity{
 	public RelativeLayout mainRelativeLayout;
 	
 	public void setupApplication(){
-		screenManager = ScreenManager.getInstance(this);
-		assetManager = AppAssetManager.getInstance(context);
+		context = this;
+		screenManager = ScreenManager.getInstance();
+		assetManager = AppAssetManager.getInstance(context.getAssets());
 		prefs = new AndroidPreference(context);
+
+        setContentView(R.layout.activity_main);
+		mainRelativeLayout = (RelativeLayout) findViewById(R.id.main_relative_layout);
 		
 		screen = new SplashScreen(this, "SplashScreen");
 		screen.init();
@@ -38,25 +43,10 @@ public abstract class Application extends Activity{
 		mainRelativeLayout.addView(screen);
 	}
 	
-	
-	public void changeScreen(BaseScreen nextScreen){
-	
-		if(nextScreen == null) return;
-		
-		mainRelativeLayout.removeView(screen);
-		screen = nextScreen;
-		screen.init();
-		mainRelativeLayout.addView(screen);
-		screenManager.changeScreen(screen);
-	}
-	
-	public boolean isPreviousScreen(){
-		boolean previousScreenAvailable = screenManager.popCurrentScreen();	
-		return previousScreenAvailable;
-	}
-	
-	public void goToPreviousScreen(){
-		changeScreen(screenManager.getTopScreen());
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setupApplication();
 	}
 	
 	public void setFont(TextView tv, String font){
@@ -68,6 +58,15 @@ public abstract class Application extends Activity{
 		if(fontEntities[2].equalsIgnoreCase("c")){
 			tv.setGravity(Gravity.CENTER);
 		}
+	}
+	
+	public void changeScreen(BaseScreen newScreen){
+		mainRelativeLayout.removeView(screen);
+		screen.removeAllViewsInLayout();
+//		screen.removeViews();
+		screen = newScreen;
+		screen.init(); 
+		mainRelativeLayout.addView(screen); 
 	}
 	
 	public void clear(){

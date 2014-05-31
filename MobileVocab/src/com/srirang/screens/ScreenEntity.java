@@ -40,17 +40,31 @@ public class ScreenEntity {
 		params.setMargins((int)x, (int)y, 0, 0);
 		tv.setLayoutParams(params);
 		app.setFont(tv, font);
+		System.out.println("TEXT : " + text);
 		tv.setText(text);
 		return tv;
 	}
 
 	private View makeImageView(Application app) {
-		ImageView view = app.assetManager.getImage(asset);
+		ImageView view = app.assetManager.getImage(app.context, asset);
 		ScalableLayoutParams params = new ScalableLayoutParams(app.context,(int)width, (int)height);
 		params.setMargins((int)x, (int)y, 0, 0);
 		view.setLayoutParams(params);
 		view.setScaleType(ScaleType.FIT_XY);
 		return view;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "x:"+x+","
+				+"y:"+y+","
+				+"height:"+height+","
+				+"width:"+width+","
+				+"asset:"+asset+","
+				+"font:"+font+","
+				+"text:"+text+","
+				+"clickable:"+clickable;
+		return result;
 	}
 	
 }

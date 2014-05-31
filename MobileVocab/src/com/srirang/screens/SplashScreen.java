@@ -17,6 +17,7 @@ public class SplashScreen extends BaseScreen {
 			
 			@Override
 			public void run() {
+				
 				app.changeScreen(new GameScreen(app,"GameScreen"));
 			}
 		}, 1500);

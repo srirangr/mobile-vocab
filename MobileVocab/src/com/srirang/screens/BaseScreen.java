@@ -31,7 +31,7 @@ public abstract class BaseScreen extends RelativeLayout{
 
 	public abstract void init();
 	
-	//For game loop. Now needed as of now
+	//For game loop. Not needed as of now
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
@@ -83,6 +83,7 @@ public abstract class BaseScreen extends RelativeLayout{
 	
 	public void addViews(){
 		for(ScreenEntity entity : entityList) {
+			System.out.println(entity.toString());
 			addView(entity.makeView(app));
 		}
 	}
