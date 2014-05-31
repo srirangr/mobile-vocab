@@ -4,14 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.widget.ImageView;
+
+import com.srirang.model.WordListItem;
 
 public class AppAssetManager {
 
@@ -88,5 +97,48 @@ public class AppAssetManager {
 	
 	public Typeface getTypeFace(){
 		return Typeface.createFromAsset(assetManager, "fonts/futurr.ttf");
+	}
+	
+	public List<WordListItem> getWordList(){
+		List<WordListItem> list = new ArrayList<WordListItem>();
+		
+		try {
+			InputStream is = assetManager.open("json/wordlist_1.json");
+			String json = convertStreamToString(is);
+			JSONArray jsonArray = new JSONArray(json);
+			for(int i=0; i < jsonArray.length() ; i++){
+				JSONObject obj = (JSONObject) jsonArray.get(i);
+				System.out.println(obj.get("word") + ":" + obj.get("meaning"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	private static String convertStreamToString(InputStream is) {
+//		Log.d(TAG, "convertStreamToString() received");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
+
+		//Log.d(TAG, "in convertStreamToString");
+		String line = null;
+		try {
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
 	}
 }

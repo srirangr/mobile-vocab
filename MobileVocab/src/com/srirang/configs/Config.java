@@ -6,4 +6,6 @@ public class Config {
 	
 	public static int SCREEN_WIDTH = 480;
 	public static int SCREEN_HEIGHT = 800;
+	
+	public String WORDLIST_PATH = "json/";
 }

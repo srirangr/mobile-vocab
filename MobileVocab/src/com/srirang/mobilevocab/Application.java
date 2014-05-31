@@ -1,16 +1,21 @@
 package com.srirang.mobilevocab;
 
+import java.util.List;
+
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.preferences.AndroidPreference;
+import com.srirang.model.WordListItem;
 import com.srirang.screens.BaseScreen;
 import com.srirang.screens.ScreenManager;
 import com.srirang.screens.SplashScreen;
 
-public class Application {
+public abstract class Application extends Activity{
 
 	public Context context;
 	
@@ -18,17 +23,14 @@ public class Application {
 	public ScreenManager screenManager;
 	public AppAssetManager assetManager;
 	
-	public RelativeLayout mainRelativeLayout;
+	public AndroidPreference prefs;
 	
-	public Application(Context context, RelativeLayout layout) {
-		this.context = context;
-		mainRelativeLayout = layout;
-		setupApplication();
-	}
+	public RelativeLayout mainRelativeLayout;
 	
 	public void setupApplication(){
 		screenManager = ScreenManager.getInstance(this);
 		assetManager = AppAssetManager.getInstance(context);
+		prefs = new AndroidPreference(context);
 		
 		screen = new SplashScreen(this, "SplashScreen");
 		screen.init();
@@ -70,6 +72,10 @@ public class Application {
 	
 	public void clear(){
 		screenManager = null;
+	}
+	
+	public List<WordListItem> getWordList(){
+		return assetManager.getWordList();
 	}
 	
 }
