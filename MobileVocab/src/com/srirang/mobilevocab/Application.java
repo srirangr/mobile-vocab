@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.RelativeLayout;
@@ -49,21 +50,13 @@ public abstract class Application extends Activity{
 		setupApplication();
 	}
 	
-	public void setFont(TextView tv, String font){
-		if(font.equals("none")) return;
-		String[] fontEntities = font.split(":");
-		tv.setTypeface(assetManager.getTypeFace());
-		tv.setTextSize(Float.parseFloat(fontEntities[0]));
-		tv.setTextColor(Color.parseColor(fontEntities[1]));
-		if(fontEntities[2].equalsIgnoreCase("c")){
-			tv.setGravity(Gravity.CENTER);
-		}
+	public Typeface getTypeFace(){
+		return assetManager.getTypeFace();
 	}
 	
 	public void changeScreen(BaseScreen newScreen){
 		mainRelativeLayout.removeView(screen);
 		screen.removeAllViewsInLayout();
-//		screen.removeViews();
 		screen = newScreen;
 		screen.init(); 
 		mainRelativeLayout.addView(screen); 

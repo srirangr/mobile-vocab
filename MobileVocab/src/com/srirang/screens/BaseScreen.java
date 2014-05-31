@@ -83,7 +83,6 @@ public abstract class BaseScreen extends RelativeLayout{
 	
 	public void addViews(){
 		for(ScreenEntity entity : entityList) {
-			System.out.println(entity.toString());
 			addView(entity.makeView(app));
 		}
 	}

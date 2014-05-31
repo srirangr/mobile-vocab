@@ -2,6 +2,7 @@ package com.srirang.screens;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -39,8 +40,13 @@ public class ScreenEntity {
 		ScalableLayoutParams params = new ScalableLayoutParams(app.context,(int)width, (int)height);
 		params.setMargins((int)x, (int)y, 0, 0);
 		tv.setLayoutParams(params);
-		app.setFont(tv, font);
-		System.out.println("TEXT : " + text);
+		tv.setTypeface(app.getTypeFace());
+		String[] fontEntities = font.split(":");
+		tv.setTextSize(Float.parseFloat(fontEntities[0]));
+		tv.setTextColor(Color.parseColor(fontEntities[1]));
+		if(fontEntities.length >= 3 && fontEntities[2].equalsIgnoreCase("c")){
+			tv.setGravity(Gravity.CENTER);
+		}
 		tv.setText(text);
 		return tv;
 	}
