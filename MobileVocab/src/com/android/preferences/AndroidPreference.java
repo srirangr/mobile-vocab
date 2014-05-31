@@ -44,13 +44,13 @@ public class AndroidPreference implements IPreference{
 	@Override
 	public int getIntegerPreference(String name, int defaultValue) {
 		String result = getPreference(name, String.valueOf(defaultValue));
-		return Integer.parseInt(result);
+		return result == null ? defaultValue : Integer.parseInt(result);
 	}
 
 	@Override
 	public int getIntegerPreference(String name) {
 		String result = getPreference(name, DEFAULT_INT_VALUE);
-		return Integer.parseInt(result);
+		return result == null ? Integer.parseInt(DEFAULT_INT_VALUE) : Integer.parseInt(result);
 	}
 
 	@Override
@@ -61,13 +61,13 @@ public class AndroidPreference implements IPreference{
 	@Override
 	public boolean getBooleanPreference(String name, boolean defaultValue) {
 		String result = getPreference(name, String.valueOf(defaultValue));
-		return Boolean.parseBoolean(result);
+		return result == null ? defaultValue :Boolean.parseBoolean(result);
 	}
 
 	@Override
 	public boolean getBooleanPreference(String name) {
 		String result = getPreference(name, DEFAULT_BOOL_VALUE);
-		return Boolean.parseBoolean(result);
+		return result == null ? Boolean.parseBoolean(DEFAULT_BOOL_VALUE) :Boolean.parseBoolean(result);
 	}
 
 }

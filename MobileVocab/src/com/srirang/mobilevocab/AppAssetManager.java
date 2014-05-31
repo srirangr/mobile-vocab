@@ -17,9 +17,9 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.widget.ImageView;
 
+import com.android.utils.Utility;
 import com.srirang.model.WordListItem;
 
 public class AppAssetManager {
@@ -108,7 +108,7 @@ public class AppAssetManager {
 		
 		try {
 			InputStream is = assetManager.open("json/wordlist_1.json");
-			String json = convertStreamToString(is);
+			String json = Utility.convertStreamToString(is);
 			JSONArray jsonArray = new JSONArray(json);
 			for(int i=0; i < jsonArray.length() ; i++){
 				JSONObject obj = (JSONObject) jsonArray.get(i);
@@ -123,26 +123,4 @@ public class AppAssetManager {
 		return null;
 	}
 	
-	private static String convertStreamToString(InputStream is) {
-//		Log.d(TAG, "convertStreamToString() received");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-		StringBuilder sb = new StringBuilder();
-
-		//Log.d(TAG, "in convertStreamToString");
-		String line = null;
-		try {
-			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return sb.toString();
-	}
 }

@@ -23,8 +23,9 @@ public class ScreenEntity {
 	public String viewType;
 	public String text;
 	public String font;
-	public String clickable;
+	public String action;
 	public String asset;
+	public String id;
 	
 	public View makeView(Application app){
 		if(viewType.equals("ImageView")){
@@ -69,7 +70,7 @@ public class ScreenEntity {
 				+"asset:"+asset+","
 				+"font:"+font+","
 				+"text:"+text+","
-				+"clickable:"+clickable;
+				+"action:"+action;
 		return result;
 	}
 	

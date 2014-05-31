@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import android.content.Context;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.srirang.mobilevocab.Application;
@@ -18,7 +18,7 @@ public abstract class BaseScreen extends RelativeLayout{
 	public Application app;
 	public final String name;
 	
-	List<ScreenEntity> entityList = new ArrayList<ScreenEntity>();
+	Map<String, View> entityMap = new HashMap<String, View>();
 	
 	public BaseScreen(Application app, String name){
 		super(app.context);
@@ -65,7 +65,7 @@ public abstract class BaseScreen extends RelativeLayout{
 							field.set(entity, values[i]);
 						}
 					}
-					entityList.add(entity);
+					entityMap.put(entity.id, entity.makeView(app));
 				}
 				rowNumber++;
 			}
@@ -82,8 +82,8 @@ public abstract class BaseScreen extends RelativeLayout{
 	}
 	
 	public void addViews(){
-		for(ScreenEntity entity : entityList) {
-			addView(entity.makeView(app));
+		for(View entity : entityMap.values()) {
+			addView(entity);
 		}
 	}
 

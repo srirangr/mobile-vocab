@@ -1,5 +1,8 @@
 package com.srirang.screens;
 
+import android.widget.TextView;
+
+import com.srirang.configs.Config;
 import com.srirang.mobilevocab.Application;
 
 public class GameScreen extends BaseScreen{
@@ -10,8 +13,11 @@ public class GameScreen extends BaseScreen{
 
 	@Override
 	public void init() {
-		
-//		app.getWordList();
-	}
+		TextView tv = (TextView) entityMap.get("preftest_label");
+		String current = tv.getText().toString();
+		int current_count = app.prefs.getIntegerPreference(Config.PREF_COUNT, 0);
+		tv.setText(current + current_count);
+		app.prefs.setIntegerPreference(Config.PREF_COUNT, current_count + 1);
+	} 
 
 }

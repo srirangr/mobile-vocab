@@ -8,4 +8,6 @@ public class Config {
 	public static int SCREEN_HEIGHT = 800;
 	
 	public String WORDLIST_PATH = "json/";
+	
+	public static String PREF_COUNT = "pref_count";
 }
