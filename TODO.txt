@@ -1,0 +1,1 @@
+Scrollview nnd it's children need to have scalable layout params. 
