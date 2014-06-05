@@ -56,6 +56,7 @@ public abstract class BaseScreen extends RelativeLayout{
 				} else {
 					String [] values = row.split(",");
 					ScreenEntity entity = new ScreenEntity();
+					// create entity objects using reflection
 					Class clazz = entity.getClass();
 					for(int i=0; i < headers.length ; i++) {
 						Field field = clazz.getField(headers[i]);

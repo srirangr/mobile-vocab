@@ -12,13 +12,13 @@ public class SplashScreen extends BaseScreen {
 
 	@Override
 	public void init() {
-		Handler handler = new Handler();
+		Handler handler = new Handler(); 
 		handler.postDelayed(new Runnable() {
 			
 			@Override
 			public void run() {
 				
-				app.changeScreen(new GameScreen(app,"GameScreen"));
+				app.changeScreen(new HomeScreen(app,"HomeScreen"));
 			}
 		}, 1500);
 	}

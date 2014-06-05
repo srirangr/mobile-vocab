@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout.LayoutParams;
@@ -32,8 +33,25 @@ public class ScreenEntity {
 			return makeImageView(app);
 		} else if(viewType.equals("TextView")){
 			return makeTextView(app);
+		} else if (viewType.equals("Button")){
+			return makeButton(app);
 		}
 		return null;
+	}
+
+	private View makeButton(Application app) {
+		Button button = new Button(app);
+		ScalableLayoutParams params = new ScalableLayoutParams(app.context,(int)width, (int)height);
+		params.setMargins((int)x, (int)y, 0, 0);
+		button.setLayoutParams(params);
+		button.setTypeface(app.getTypeFace());
+		String[] fontEntities = font.split(":");
+		button.setTextSize(Float.parseFloat(fontEntities[0]));
+		button.setTextColor(Color.parseColor(fontEntities[1]));
+		button.setText(text);
+		
+		button.setBackgroundColor(Color.parseColor(asset));
+		return button;
 	}
 
 	private View makeTextView(Application app) {
@@ -49,6 +67,11 @@ public class ScreenEntity {
 			tv.setGravity(Gravity.CENTER);
 		}
 		tv.setText(text);
+		
+		if(!asset.equalsIgnoreCase("none")){
+			tv.setBackgroundColor(Color.parseColor(asset));
+		}
+		
 		return tv;
 	}
 
